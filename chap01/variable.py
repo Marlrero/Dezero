@@ -4,8 +4,7 @@ import numpy as np
 
 class Variable:
     def __init__(self, data: np.ndarray) -> None:
-        """
-        [변수]
+        """[변수]
 
         Args:
             data (np.ndarray): [Numpy 다차원배열]
