@@ -3,7 +3,7 @@ import numpy as np
 # https://www.python.org/dev/peps/pep-0008
 
 class Variable:
-    """변수 클래스
+    """변수
     """
     def __init__(self, data: np.ndarray) -> None:
         """변수
@@ -12,6 +12,7 @@ class Variable:
             data (np.ndarray): Numpy 다차원배열
         """
         self.data = data
+        self.grad = None # Numpy 다차원배열 (역전파 미분값)
         
     # 내가 만든거 추가
     # Ref: https://shoark7.github.io/programming/python/difference-between-__repr__-vs-__str__
