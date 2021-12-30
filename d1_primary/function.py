@@ -156,5 +156,25 @@ if __name__ == '__main__':
         y = C(b)
         print(y)
         
+        # 순전파 구현
+        print("forward!")
+        A = Square()
+        B = Exp()
+        C = Square()
+        
+        x = Variable(np.array(0.5))
+        a = A(x)
+        b = B(a)
+        c = C(b)
+        print(a, b, c)
+        
+        # 역전파 구현
+        print("backward")
+        y.grad = np.array(1.0)
+        b.grad = C.backward(y.grad)
+        a.grad = B.backward(b.grad)
+        x.grad = A.backward(a.grad)
+        print(y.grad, b.grad, a.grad, x.grad)
+        
     
     main()
