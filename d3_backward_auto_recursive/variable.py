@@ -7,7 +7,9 @@ import numpy as np
 from typing import TYPE_CHECKING   
 
 if TYPE_CHECKING:  # 단순히 타입체킹을 위해 필요한 모듈이라면!
-    from function import Function
+    import sys
+    sys.path.append("..")
+    from d2_backward_auto.function import Function
 
 class Variable:  
     """변수
@@ -27,7 +29,8 @@ class Variable:
     def set_creator(self, func: 'Function'):  # 타입체킹을 위한 Circular reference problem이 발생한다면 문자열로 처리해야 함
         self.creator = func
         
-    
+        """변수 자체에서 창조자(함수)를 가져와 자동 미분 진행 함수
+        """
     def backward(self):
         f = self.creator  # 변수의 창조자(함수)를 가져온다
         if f is not None: # 창조자가 재귀를 거치다가 None을 만나면(사용자가 Variable 인스턴스 바깥에서 직접 생성한 것임) 멈춘다

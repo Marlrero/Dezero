@@ -15,3 +15,7 @@ a = A(x)
 b = B(a)
 y = C(b)
 print(f"x = {x}\na: {a}\nb: {b}\ny: {y}")
+
+y.grad = np.array(1.0)
+y.backward() # recursive!
+print(f"x.grad = {x.grad}")
