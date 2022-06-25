@@ -1,7 +1,7 @@
 import numpy as np
 
-from function import Exp, Function, Square
-from variable import Variable
+from .function import Exp, Function, Square
+from .variable import Variable
 
 # 중심차분(오차 발생)
 def numerical_diff(f: Function, 

@@ -11,7 +11,6 @@ if TYPE_CHECKING:  # 단순히 타입체킹을 위해 필요한 모듈이라면!
     sys.path.append("..")
     from d2_backward_auto.function import Function
 
-
 class Variable:  
     """변수
     """
@@ -21,7 +20,10 @@ class Variable:
         Args:
             data (np.ndarray): Numpy 다차원배열
         """
-        
+        # data가 ndarray만 취급
+        if data is not None:  # data가 없을 수도(None) 있음
+            if not isinstance(data, np.ndarray):
+                raise TypeError(f'{type(data)}은(는) 지원하지 않습니다.')
         
         self.data = data
         self.grad = None # Numpy 다차원배열 (역전파 미분값)
@@ -64,7 +66,7 @@ class Variable:
         """객체를 문자열로 표현하는 함수(내장)
 
         Returns:
-            data (np.ndarray): data 객체 리턴
+            data (str): data 객체 리턴
         """
         return str(self.data)
     

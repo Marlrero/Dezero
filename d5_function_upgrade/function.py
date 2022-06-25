@@ -1,7 +1,21 @@
 import numpy as np
-from variable import Variable
+from .variable import Variable
 # https://www.python.org/dev/peps/pep-0008
 # https://www.python.org/dev/peps/pep-0007/
+
+def as_array(x) -> np.ndarray:
+    """Variable 클래스의 data가 np.ndarray 타입을 강제하는 함수
+      (main.py 68번째 라인 참고)
+
+    Args:
+        x ([type]): 스칼라(np.int, np.float00)나 리스트 모두 올 수 있음
+
+    Returns:
+        [np.ndarray]
+    """
+    if np.isscalar(x):  # 입력 x가 스칼라면 (0차원이면)
+        return np.array(x)  # ndarray로 감싸라
+    return x
 
 class Function:
     """함수 클래스
@@ -34,7 +48,8 @@ class Function:
         """
         x = input.data        # 데이터 꺼내기
         y = self.forward(x)   # 구체적 계산은 forward(순전파) 함수에 위임
-        output = Variable(y)  # 결과 변수에 넣기
+        #output = Variable(y)  # 결과 변수에 넣기
+        output = Variable(as_array(y)) # 결과 변수가 항상 ndarray로 맞춰줌
         output.set_creator(self)  # 변수에 창조자는 이 함수가 됨 (연결을 동적으로 하는 것임)
         
         self.input = input    # 입력변수 저장 (역전파를 위해 순전파 데이터 저장 필요)
